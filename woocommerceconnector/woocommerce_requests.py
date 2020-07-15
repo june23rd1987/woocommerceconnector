@@ -148,30 +148,30 @@ def get_woocommerce_items(ignore_filter_conditions=False):
 
     return woocommerce_products
 
-def get_woocommerce_item_variants(woocommerce_product_id):
+def get_woocommerce_item_variants(woocommerce_id): #woocommerce_product_id
     woocommerce_product_variants = []
 
     filter_condition = ''
 
-    response = get_request_request('products/{0}/variations?per_page={1}&{2}'.format(woocommerce_product_id,_per_page,filter_condition))
+    response = get_request_request('products/{0}/variations?per_page={1}&{2}'.format(woocommerce_id,_per_page,filter_condition)) #woocommerce_product_id
     woocommerce_product_variants.extend(response.json()) 
     
 
     for page_idx in range(1, int( response.headers.get('X-WP-TotalPages')) or 1):
-        response = get_request_request('products/{0}/variations?per_page={1}&page={2}&{3}'.format(woocommerce_product_id, _per_page, page_idx+1, filter_condition))
+        response = get_request_request('products/{0}/variations?per_page={1}&page={2}&{3}'.format(woocommerce_id, _per_page, page_idx+1, filter_condition)) #woocommerce_product_id
         woocommerce_product_variants.extend(response.json())
     
     
     return woocommerce_product_variants
 
     for page_idx in range(1, int( response.headers.get('X-WP-TotalPages')) or 1):
-        response = get_request_request('products/{0}/variations?per_page={1}&page={2}&{3}'.format(woocommerce_product_id, _per_page, page_idx+1, filter_condition))
+        response = get_request_request('products/{0}/variations?per_page={1}&page={2}&{3}'.format(woocommerce_id, _per_page, page_idx+1, filter_condition)) #woocommerce_product_id
         woocommerce_product_variants.extend(response.json())
     
     return woocommerce_product_variants
 
-def get_woocommerce_item_image(woocommerce_product_id):
-    return get_request("products/{0}".format(woocommerce_product_id))["images"]
+def get_woocommerce_item_image(woocommerce_id): #woocommerce_product_id
+    return get_request("products/{0}".format(woocommerce_id))["images"] #woocommerce_product_id
 
 
 def get_woocommerce_tax(woocommerce_tax_id):
