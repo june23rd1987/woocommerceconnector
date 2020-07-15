@@ -57,8 +57,8 @@ class WooCommerceSettings(unittest.TestCase):
 			"Sales Invoice": [{"woocommerce_order_id": "2414345735"}],
 			"Delivery Note": [{"woocommerce_order_id": "2414345735"}],
 			"Sales Order": [{"woocommerce_order_id": "2414345735"}],
-			"Item": [{"woocommerce_product_id" :"4059739520"},{"woocommerce_product_id": "13917612359"}, 
-				{"woocommerce_product_id": "13917612423"}, {"woocommerce_product_id":"13917612487"}],
+			"Item": [{"woocommerce_id" :"4059739520"},{"woocommerce_id": "13917612359"}, 	#woocommerce_product_id
+				{"woocommerce_id": "13917612423"}, {"woocommerce_id":"13917612487"}],	#woocommerce_product_id
 			"Address": [{"woocommerce_address_id": "2476804295"}],
 			"Customer": [{"woocommerce_customer_id": "2324518599"}]
 		}
@@ -80,7 +80,7 @@ class WooCommerceSettings(unittest.TestCase):
 
 		item = frappe.get_doc("Item", cstr(woocommerce_item.get("product").get("id")))
 
-		self.assertEqual(cstr(woocommerce_item.get("product").get("id")), item.woocommerce_product_id)
+		self.assertEqual(cstr(woocommerce_item.get("product").get("id")), item.woocommerce_id)			#woocommerce_product_id
 		self.assertEqual(item.sync_with_woocommerce, 1)
 
 		#test variant price
