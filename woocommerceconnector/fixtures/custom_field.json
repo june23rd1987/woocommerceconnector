@@ -190,7 +190,7 @@
   "ignore_user_permissions": 0, 
   "ignore_xss_filter": 0, 
   "in_filter": 0, 
-  "in_list_view": 0, 
+  "in_list_view": 1, 
   "insert_after": "item_code", 
   "label": "woocommerce Product Id", 
   "modified": "2016-01-19 15:44:16.132952", 
