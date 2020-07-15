@@ -80,7 +80,7 @@ class WooCommerceSettings(unittest.TestCase):
 
 		item = frappe.get_doc("Item", cstr(woocommerce_item.get("product").get("id")))
 
-		self.assertEqual(cstr(woocommerce_item.get("product").get("id")), item.woocommerce_id)			#woocommerce_product_id
+		self.assertEqual(cstr(woocommerce_item.get("product").get("id")), item.woocommerce_id)				#woocommerce_product_id
 		self.assertEqual(item.sync_with_woocommerce, 1)
 
 		#test variant price
