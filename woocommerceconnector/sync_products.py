@@ -491,7 +491,7 @@ def get_product_update_dict_and_resource(woocommerce_id, woocommerce_variant_id,
 def add_w_id_to_erp():
     # purge WooCommerce IDs so that there cannot be any conflict
     purge_ids = """UPDATE `tabItem`
-            SET `woocommerce_product_id` = NULL, `woocommerce_variant_id` = NULL;"""
+            SET `woocommerce_id` = NULL, `woocommerce_variant_id` = NULL;""" #woocommerce_product_id
     frappe.db.sql(purge_ids)
     frappe.db.commit()
 
@@ -501,14 +501,14 @@ def add_w_id_to_erp():
         request_data={}, exception=True)
     for woocommerce_item in woo_items:
         update_item = """UPDATE `tabItem`
-            SET `woocommerce_product_id` = '{0}'
-            WHERE `barcode` = '{1}';""".format(woocommerce_item.get("id"), woocommerce_item.get("sku"))
+            SET `woocommerce_id` = '{0}' 
+            WHERE `barcode` = '{1}';""".format(woocommerce_item.get("id"), woocommerce_item.get("sku")) #woocommerce_product_id
         frappe.db.sql(update_item)
         frappe.db.commit()
         for woocommerce_variant in get_woocommerce_item_variants(woocommerce_item.get("id")):
             update_variant = """UPDATE `tabItem`
-                SET `woocommerce_variant_id` = '{0}', `woocommerce_product_id` = '{1}'
-                WHERE `barcode` = '{2}';""".format(woocommerce_variant.get("id"), woocommerce_item.get("id"), woocommerce_variant.get("sku"))
+                SET `woocommerce_variant_id` = '{0}', `woocommerce_id` = '{1}'
+                WHERE `barcode` = '{2}';""".format(woocommerce_variant.get("id"), woocommerce_item.get("id"), woocommerce_variant.get("sku")) #woocommerce_product_id
             frappe.db.sql(update_variant)
             frappe.db.commit()
     make_woocommerce_log(title="IDs synced", status="Success", method="add_w_id_to_erp", message={},
