@@ -166,7 +166,7 @@ def get_erpnext_items(price_list):
         i.woocommerce_variant_id, i.sync_qty_with_woocommerce, i.weight_per_unit, i.weight_uom
         from `tabItem` i, `tabItem Price` ip
         where price_list = '%s' and i.name = ip.item_code
-            and sync_with_woocommerce=1 and (disabled is null or disabled = 0) %s""" %(price_list, item_price_condition) #woocommerce_product_id
+            and sync_with_woocommerce=1 and (disabled is null or disabled = 0) %s""" %(price_list, item_price_condition)                #woocommerce_product_id
 
     updated_price_item_list = frappe.db.sql(item_from_item_price, as_dict=1)
 
@@ -181,6 +181,7 @@ def sync_item_with_woocommerce(item, price_list, warehouse, woocommerce_item=Non
             "name": item.get("item_name"),
             "description": item.get("woocommerce_description") or item.get("web_long_description") or item.get("description"),
             "short_description": item.get("woocommerce_description") or item.get("web_long_description") or item.get("description"),
+            "sku": item.get("item_code"),                                                                                               #jupiter - additional
     }
     item_data.update( get_price_and_stock_details(item, warehouse, price_list) )
 
