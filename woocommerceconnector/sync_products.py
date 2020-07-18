@@ -178,12 +178,12 @@ def sync_item_with_woocommerce(item, price_list, warehouse, woocommerce_item=Non
     variant_item_name_list = []
     variant_list = []
     wc_product_category_id = frappe.db.get_value(
-        "Item Group", item_doc.item_group, "woocommerce_id_za")
+        "Item Group", item.item_group, "woocommerce_id_za") #jupiter - additional
     item_data = {
             "name": item.get("item_name"),
             "description": item.get("woocommerce_description") or item.get("web_long_description") or item.get("description"),
             "short_description": item.get("woocommerce_description") or item.get("web_long_description") or item.get("description"),
-            "sku": item.get("item_code"),                                                                                               #jupiter - additional
+            "sku": item.get("item_code"),                                                                                                #jupiter - additional
             "categories": [
                 {
                     "id": wc_product_category_id                                                                                        #jupiter - additional
