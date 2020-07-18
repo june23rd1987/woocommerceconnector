@@ -205,7 +205,7 @@ def sync_item_with_woocommerce(item, price_list, warehouse, woocommerce_item=Non
     if not item.get("woocommerce_id"):                                                                      #woocommerce_product_id
         item_data["status"] = "draft"
         create_new_item_to_woocommerce(item, item_data, erp_item, variant_item_name_list)
-    elif not isnumeric(item.get("woocommerce_id"))
+    elif not item.get("woocommerce_id").isnumeric():
         item_data["status"] = "draft"    
         create_new_item_to_woocommerce(item, item_data, erp_item, variant_item_name_list)
 
