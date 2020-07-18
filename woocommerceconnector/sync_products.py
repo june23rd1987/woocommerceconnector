@@ -177,7 +177,7 @@ def get_erpnext_items(price_list):
 def sync_item_with_woocommerce(item, price_list, warehouse, woocommerce_item=None):
     variant_item_name_list = []
     variant_list = []
-    category_set = """[{'name' : '{0}'}]""".format(item.get("item_group")) #jupiter - additional
+    category_set = """[\{'name' : '{0}'\}]""".format(item.get("item_group")) #jupiter - additional
     item_data = {
             "name": item.get("item_name"),
             "description": item.get("woocommerce_description") or item.get("web_long_description") or item.get("description"),
