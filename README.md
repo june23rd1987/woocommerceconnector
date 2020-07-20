@@ -1,3 +1,8 @@
+## CREDITS GOES TO:
+https://github.com/libracore
+
+
+
 ## ERPNext WooCommerce Connector
 
 WooCommerce connector for ERPNext
