@@ -228,6 +228,8 @@ def sync_item_with_woocommerce(item, price_list, warehouse, woocommerce_item=Non
                 else:
                     disable_woocommerce_sync_for_item(erp_item)
             else:
+                make_woocommerce_log(title=e, status="Error", method="sync_products.sync_item_with_woocommerce", message=frappe.get_traceback(),
+                request_data=item_data, exception=True)
                 raise e
 
     if variant_list:
