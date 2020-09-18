@@ -128,17 +128,17 @@ def sync_erpnext_items(price_list, warehouse, woocommerce_item_list):
         woocommerce_item_list[int(item['id'])] = item
 
     for item in get_erpnext_items(price_list):
-        if item.sync_qty_with_woocommerce and item.sync_with_woocommerce: #jupiter - additional - SEPTEMBER 9, 2020 skip products disabled syncs
-            try:
-                sync_item_with_woocommerce(item, price_list, warehouse, woocommerce_item_list.get(item.get('woocommerce_id'))) #woocommerce_product_id
-                frappe.local.form_dict.count_dict["products"] += 1
+        #if item.sync_qty_with_woocommerce and item.sync_with_woocommerce: #jupiter - additional - SEPTEMBER 9, 2020 skip products disabled syncs
+        try:
+            sync_item_with_woocommerce(item, price_list, warehouse, woocommerce_item_list.get(item.get('woocommerce_id'))) #woocommerce_product_id
+            frappe.local.form_dict.count_dict["products"] += 1
 
-            except woocommerceError as e:
-                make_woocommerce_log(title=e.message, status="Error", method="sync_woocommerce_items", message=frappe.get_traceback(),
-                    request_data=item, exception=True)
-            except Exception as e:
-                make_woocommerce_log(title=e.message, status="Error", method="sync_woocommerce_items", message=frappe.get_traceback(),
-                    request_data=item, exception=True)
+        except woocommerceError as e:
+            make_woocommerce_log(title=e.message, status="Error", method="sync_woocommerce_items", message=frappe.get_traceback(),
+                request_data=item, exception=True)
+        except Exception as e:
+            make_woocommerce_log(title=e.message, status="Error", method="sync_woocommerce_items", message=frappe.get_traceback(),
+                request_data=item, exception=True)
 
 def get_erpnext_items(price_list):
     erpnext_items = []
