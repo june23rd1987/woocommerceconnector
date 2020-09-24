@@ -86,7 +86,7 @@
    "fieldname": "sync_itemgroup_to_wp_categories",
    "fieldtype": "Check",
    "description": "For Items with sub-category in Woocommerce, disable this after manual",
-   "label": "Sync Item Group to Woocommerce Categories after Manual Woocommece"
+   "label": "Sync Item Group to Woocommerce Categories after Woocommerce Manual Update"
   },
   {
    "default": "Public",
