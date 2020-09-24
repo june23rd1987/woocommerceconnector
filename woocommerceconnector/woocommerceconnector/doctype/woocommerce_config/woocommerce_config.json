@@ -8,6 +8,7 @@
   "enable_woocommerce",
   "verify_ssl",
   "hourly_sync",
+  "sync_itemgroup_to_wp_categories",
   "app_type",
   "column_break_4",
   "last_sync_datetime",
@@ -80,6 +81,14 @@
    "label": "Hourly synchronization"
   },
   {
+   "default": "0",
+   "hidden": 0,
+   "fieldname": "sync_itemgroup_to_wp_categories",
+   "fieldtype": "Check",
+   "description": "For Items with sub-category in Woocommerce, disable this after manual",
+   "label": "Sync Item Group to Woocommerce Categories after Manual Woocommece"
+  },
+  {
    "default": "Public",
    "fieldname": "app_type",
    "fieldtype": "Select",
@@ -122,7 +131,7 @@
   },
   {
    "fieldname": "api_secret",
-   "fieldtype": "Password",
+   "fieldtype": "Data",
    "label": "API Secret"
   },
   {
