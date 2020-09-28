@@ -122,8 +122,12 @@ def get_item_details(woocommerce_item):
             ["name", "stock_uom", "item_name"], as_dict=1)
         return item_details
 
+def get_woocommerce_id(woocommerce_item_list):
+    return woocommerce_item_list.get('woocommerce_id')
+
 def sync_erpnext_items(price_list, warehouse, woocommerce_item_list):
     woocommerce_item_list = {}
+    woocommerce_item_list.sort(key=get_woocommerce_id)
     for item in get_woocommerce_items():
         woocommerce_item_list[int(item['id'])] = item
 
@@ -134,7 +138,7 @@ def sync_erpnext_items(price_list, warehouse, woocommerce_item_list):
             frappe.local.form_dict.count_dict["products"] += 1
 
         except woocommerceError as e:
-            make_woocommerce_log(title=e.message, status="Error", method="sync_woocommerce_items", message=frappe.get_traceback(),
+            make_woocommerce_log(title=e.message + " " + woocommerce_item_list.get(item.get('woocommerce_id')), status="Error", method="sync_woocommerce_items", message=frappe.get_traceback(),
                 request_data=item, exception=True)
         except Exception as e:
             make_woocommerce_log(title=e.message, status="Error", method="sync_woocommerce_items", message=frappe.get_traceback(),
