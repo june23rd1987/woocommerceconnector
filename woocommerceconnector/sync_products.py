@@ -535,6 +535,7 @@ def add_w_id_to_erp():
         frappe.db.sql(update_item)
         frappe.db.commit()
         
+        #####REMOVED BY JUPITER - NOT NEEDED CODE
         #for woocommerce_variant in get_woocommerce_item_variants(woocommerce_item.get("id")):
         #    update_variant = """UPDATE `tabItem`
         #        SET `woocommerce_variant_id` = '{0}', `woocommerce_id` = '{1}', `ugs` = '{1}'
