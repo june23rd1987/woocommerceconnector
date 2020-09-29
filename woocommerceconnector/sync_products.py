@@ -531,7 +531,7 @@ def add_w_id_to_erp():
     for woocommerce_item in woo_items:
         update_item = """UPDATE `tabItem`
             SET `woocommerce_id` = '{0}', `ugs` = '{1}' 
-            WHERE `item_code` = '{2}';""".format(woocommerce_item.get("id"), woocommerce_item.get("sku"), woocommerce_item.get("sku")) #woocommerce_product_id
+            WHERE `item_code` = '{1}';""".format(woocommerce_item.get("id"), woocommerce_item.get("sku")) #woocommerce_product_id
         frappe.db.sql(update_item)
         frappe.db.commit()
         for woocommerce_variant in get_woocommerce_item_variants(woocommerce_item.get("id")):
