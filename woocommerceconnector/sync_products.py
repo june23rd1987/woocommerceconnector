@@ -456,9 +456,12 @@ def trigger_update_item_stock(doc, method):
     if doc.flags.via_stock_ledger_entry:
         woocommerce_settings = frappe.get_doc("WooCommerce Config", "WooCommerce Config")
         if woocommerce_settings.woocommerce_url and woocommerce_settings.enable_woocommerce:
-            update_item_stock(doc.item_code, woocommerce_settings, doc)
-            make_woocommerce_log(title="woocommerceconnector.trigger_update_item_stock", status="Success", method="woocommerceconnector.trigger_update_item_stock", message=frappe.get_traceback(), request_data=doc.item_code, exception=True)
-
+            try:
+                update_item_stock(doc.item_code, woocommerce_settings, doc)
+                make_woocommerce_log(title="WooCommerce Config woocommerceconnector.trigger_update_item_stock", status="Success", method="woocommerceconnector.trigger_update_item_stock", message=frappe.get_traceback(), request_data=doc.item_code, exception=True)
+            except Exception as e:
+                make_woocommerce_log(title="WooCommerce Config: " + e, status="Error", method="trigger_update_item_stock", message=frappe.get_traceback(), request_data=doc.item_code, exception=True)
+            
 
 def update_item_stock_qty():
     woocommerce_settings = frappe.get_doc("WooCommerce Config", "WooCommerce Config")
