@@ -499,11 +499,11 @@ def update_item_stock(item_code, woocommerce_settings, bin=None):
             else:
                 item_data, resource = get_product_update_dict_and_resource(item.woocommerce_id, item.woocommerce_variant_id, actual_qty=qty)                    #woocommerce_product_id
             try:
-                #make_woocommerce_log(title="Update stock of {0}".format(item.barcode), status="Started", method="update_item_stock", message="Resource: {0}, data: {1}".format(resource, item_data))
+                make_woocommerce_log(title="Update stock of {0}".format(item.item_code), status="Started", method="woocommerceconnector.sync_products.update_item_stock", message="Resource: {0}, data: {1}".format(resource, item_data))
                 put_request(resource, item_data)
             except requests.exceptions.HTTPError as e:
                 if e.args[0] and e.args[0].startswith("404"):
-                    make_woocommerce_log(title=e.message, status="Error", method="update_item_stock", message=frappe.get_traceback(),
+                    make_woocommerce_log(title=e.message, status="Error", method="woocommerceconnector.sync_products.update_item_stock", message=frappe.get_traceback(),
                         request_data=item_data, exception=True)
                     disable_woocommerce_sync_for_item(item)
                 else:
@@ -548,5 +548,5 @@ def add_w_id_to_erp():
         #    frappe.db.sql(update_variant)
         #    frappe.db.commit()
         
-    make_woocommerce_log(title="IDs synced", status="Success", method="add_w_id_to_erp", message={},
+    make_woocommerce_log(title="IDs synced", status="Success", method="woocommerceconnector.sync_products.add_w_id_to_erp", message={},
         request_data={}, exception=True)
